@@ -44,7 +44,8 @@ app.post('/api/login', (req, res) => {
   res.json({ token });
 });
 
-app.listen(5000, () => console.log('Server running on port 5000'));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // Create a quiz (protected)
 app.post('/api/quizzes', authenticateToken, (req, res) => {
