@@ -12,7 +12,7 @@ import RequireAuth from './RequireAuth';
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/educational-quiz-platform">
       <Routes>
         <Route path="/auth" element={<AuthForm />} />
         <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
