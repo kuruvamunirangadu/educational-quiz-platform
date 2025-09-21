@@ -1,5 +1,5 @@
 // API utility for authentication and quizzes
-const API_URL = 'https://educational-quiz-platform-3.onrender.com/api';
+const API_URL = 'https://educational-quiz-platform--.onrender.com/api';
 
 export async function register(username, password) {
   const res = await fetch(`${API_URL}/register`, {
