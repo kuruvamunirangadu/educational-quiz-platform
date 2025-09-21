@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/educational-quiz-platform/static/css/main.b58a933b.css",
-    "main.js": "/educational-quiz-platform/static/js/main.bd64d301.js",
+    "main.js": "/educational-quiz-platform/static/js/main.8a53dce8.js",
     "index.html": "/educational-quiz-platform/index.html",
     "main.b58a933b.css.map": "/educational-quiz-platform/static/css/main.b58a933b.css.map",
-    "main.bd64d301.js.map": "/educational-quiz-platform/static/js/main.bd64d301.js.map"
+    "main.8a53dce8.js.map": "/educational-quiz-platform/static/js/main.8a53dce8.js.map"
   },
   "entrypoints": [
     "static/css/main.b58a933b.css",
-    "static/js/main.bd64d301.js"
+    "static/js/main.8a53dce8.js"
   ]
 }
