@@ -8,7 +8,12 @@ const SECRET = 'your_jwt_secret';
 const { createQuiz, getAllQuizzes, getQuizById } = require('./quizModel');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://kuruvamunirangadu.github.io'
+  ]
+}));
 app.use(bodyParser.json());
 
 // Middleware to verify JWT
@@ -47,6 +52,7 @@ app.post('/api/login', (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
+
 // Create a quiz (protected)
 app.post('/api/quizzes', authenticateToken, (req, res) => {
   const { title, questions } = req.body;
@@ -57,14 +63,22 @@ app.post('/api/quizzes', authenticateToken, (req, res) => {
   res.json(quiz);
 });
 
-// Get all quizzes
+// Get all quizzes (public)
 app.get('/api/quizzes', (req, res) => {
-  res.json(getAllQuizzes());
+  try {
+    res.json(getAllQuizzes());
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
-// Get quiz by ID
+// Get quiz by ID (public)
 app.get('/api/quizzes/:id', (req, res) => {
-  const quiz = getQuizById(Number(req.params.id));
-  if (!quiz) return res.status(404).json({ message: 'Quiz not found' });
-  res.json(quiz);
+  try {
+    const quiz = getQuizById(Number(req.params.id));
+    if (!quiz) return res.status(404).json({ message: 'Quiz not found' });
+    res.json(quiz);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
 });
