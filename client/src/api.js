@@ -1,8 +1,9 @@
+
 // API utility for authentication and quizzes
 const API_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:5000/api'
-    : 'https://educational-quiz-platform--.onrender.com/api';
+  : 'https://educational-quiz-platform-4.onrender.com/api';
 
 export async function register(username, password) {
   const res = await fetch(`${API_URL}/register`, {
