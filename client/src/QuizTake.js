@@ -20,14 +20,16 @@ export default function QuizTake() {
   if (!quiz) return <div>Loading...</div>;
 
   const handleAnswer = idx => {
-    setAnswers([...answers, idx]);
+    const newAnswers = [...answers, idx];
+    setAnswers(newAnswers);
+    
     if (current + 1 < quiz.questions.length) {
       setCurrent(current + 1);
     } else {
-      // Calculate score
+      // Calculate score (include the current answer)
       let s = 0;
       quiz.questions.forEach((q, i) => {
-        if (answers[i] === q.answer) s++;
+        if (newAnswers[i] === q.answer) s++;
       });
       setScore(s);
       setShowResult(true);

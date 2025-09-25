@@ -11,6 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
+    'http://localhost:3001',
     'https://kuruvamunirangadu.github.io'
   ]
 }));
@@ -49,17 +50,28 @@ app.post('/api/login', (req, res) => {
   res.json({ token });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
 // Create a quiz (protected)
 app.post('/api/quizzes', authenticateToken, (req, res) => {
   const { title, questions } = req.body;
+  console.log('Received quiz data:', { title, questions, questionsLength: questions?.length });
+  
   if (!title || !questions || !Array.isArray(questions)) {
+    console.log('Invalid quiz data:', { title: !!title, questions: !!questions, isArray: Array.isArray(questions) });
     return res.status(400).json({ message: 'Invalid quiz data' });
   }
+  
+  // Validate each question has required fields
+  for (let i = 0; i < questions.length; i++) {
+    const q = questions[i];
+    console.log(`Question ${i}:`, q);
+    if (!q.question || !q.options || !Array.isArray(q.options) || q.options.length !== 4 || q.answer === undefined) {
+      console.log('Invalid question structure:', q);
+      return res.status(400).json({ message: `Invalid question structure at index ${i}` });
+    }
+  }
+  
   const quiz = createQuiz({ title, questions, createdBy: req.user.username });
+  console.log('Created quiz:', quiz);
   res.json(quiz);
 });
 
@@ -82,3 +94,6 @@ app.get('/api/quizzes/:id', (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
