@@ -2,8 +2,8 @@
 
 A full-stack React and Node.js application for educational quiz platform focused on anti-drug and environmental education. Features user authentication, quiz creation, taking, results with feedback, and mobile-friendly design.
 
-## Live Demo
-- https://kuruvamunirangadu.github.io/educational-quiz-platform/
+## Live Link
+- [Open Educational Quiz Platform](https://kuruvamunirangadu.github.io/educational-quiz-platform/)
 
 ## Structure
 - `client/` - React frontend
